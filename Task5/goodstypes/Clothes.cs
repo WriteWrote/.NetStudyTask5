@@ -27,7 +27,7 @@ namespace Task5
 
         public override string ToString()
         {
-            return "size: " + this.Size + "; color: " + Color + "; season: " + Season + " style:" + Style;
+            return "size " + this.Size + ", " + Color + " color, for " + Season + " in " + Style + " style";
         }
     }
 }

@@ -46,7 +46,7 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Clothes.cs" />
+        <Compile Include="enums\HumanType.cs" />
         <Compile Include="enums\Season.cs" />
         <Compile Include="enums\Style.cs" />
         <Compile Include="Form1.cs">
@@ -55,7 +55,11 @@
         <Compile Include="Form1.Designer.cs">
             <DependentUpon>Form1.cs</DependentUpon>
         </Compile>
-        <Compile Include="ITextile.cs" />
+        <Compile Include="goodstypes\Clothes.cs" />
+        <Compile Include="goods\CosplayCostume.cs" />
+        <Compile Include="goods\FormalCostume.cs" />
+        <Compile Include="goods\HalloweenCostume.cs" />
+        <Compile Include="materials\ITextile.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <EmbeddedResource Include="Properties\Resources.resx">
