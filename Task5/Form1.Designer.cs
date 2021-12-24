@@ -64,6 +64,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {"Task5.CosplayCostume.cs", "Task5.FormalCostume.cs", "Task5.HalloweenCostume.cs"});
             this.comboBox1.Location = new System.Drawing.Point(17, 106);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(222, 24);
@@ -106,9 +107,9 @@
             // 
             this.label3.Location = new System.Drawing.Point(17, 219);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 23);
+            this.label3.Size = new System.Drawing.Size(174, 23);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Поле";
+            this.label3.Text = "Параметр метода";
             // 
             // textBox2
             // 
