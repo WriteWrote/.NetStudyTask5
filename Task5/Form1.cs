@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -66,22 +67,26 @@ namespace Task5
             {
                 if (comboBox3.Items.Count > 0 && comboBox3.SelectedItem != null)
                 {
+                    object newObj = Activator.CreateInstance(currType);
                     if (e.KeyCode == Keys.Enter)
                     {
-                        object newObj = Activator.CreateInstance(currType);
-                        //SomeType someObject2 = newObj as SomeType;
-                        /*
-                        currObj = (ITextile) newObj;
-                        currObj.Invoke(currMethods[comboBox2.SelectedItem.ToString().Trim()]);
-                        
-                        MethodInfo m, mb;
-                        m = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
-                        mb = m.GetBaseDefinition();
-                        */
-                        MethodInfo info = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
-                        info.Invoke(newObj, null);
-                        
+                        String parName = comboBox3.SelectedItem.ToString().Trim();
+                        String par = textBox2.Text.Trim();
+                        MethodInfo setMethod = currType.GetMethod("set" + parName);
+                        setMethod.Invoke(newObj, new[] {par});
                     }
+
+                    //SomeType someObject2 = newObj as SomeType;
+                    /*
+                    currObj = (ITextile) newObj;
+                    currObj.Invoke(currMethods[comboBox2.SelectedItem.ToString().Trim()]);
+                    
+                    MethodInfo m, mb;
+                    m = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
+                    mb = m.GetBaseDefinition();
+                    */
+                    MethodInfo info = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
+                    info.Invoke(newObj, null);
                 }
             }
         }
