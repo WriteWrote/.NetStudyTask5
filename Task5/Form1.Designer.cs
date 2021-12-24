@@ -65,7 +65,7 @@
             // 
             this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {"Task5.CosplayCostume.cs", "Task5.FormalCostume.cs", "Task5.HalloweenCostume.cs"});
+            this.comboBox1.Items.AddRange(new object[] {"Task5.CosplayCostume", "Task5.FormalCostume", "Task5.HalloweenCostume"});
             this.comboBox1.Location = new System.Drawing.Point(17, 106);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(222, 24);

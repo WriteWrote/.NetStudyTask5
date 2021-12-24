@@ -17,6 +17,7 @@ namespace Task5
         private Type currType;
         private Dictionary<String, MethodInfo> currMethods;
         private Dictionary<String, ParameterInfo> currParams;
+        private ITextile currObj;
 
         public Form1()
         {
@@ -38,11 +39,10 @@ namespace Task5
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            // TODO: при выборе класса подгружать методы и поля в к-б бокс
-            Type myType = Type.GetType("Task5.CosplayCostume", false, true);
+            Type myType = Type.GetType(comboBox1.SelectedItem.ToString().Trim(), false, true);
             currType = myType;
             List<String> methods = new List<string>();
-            
+
             foreach (MethodInfo method in myType.GetMethods())
             {
                 string modificator = "";
@@ -61,8 +61,29 @@ namespace Task5
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
-            throw new System.NotImplementedException();
             // TODO: если к-б-ы не пусты, нажат энтер, то заполнить поле класса
+            if (comboBox1.SelectedItem != null && comboBox2.SelectedItem != null)
+            {
+                if (comboBox3.Items.Count > 0 && comboBox3.SelectedItem != null)
+                {
+                    if (e.KeyCode == Keys.Enter)
+                    {
+                        object newObj = Activator.CreateInstance(currType);
+                        //SomeType someObject2 = newObj as SomeType;
+                        /*
+                        currObj = (ITextile) newObj;
+                        currObj.Invoke(currMethods[comboBox2.SelectedItem.ToString().Trim()]);
+                        
+                        MethodInfo m, mb;
+                        m = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
+                        mb = m.GetBaseDefinition();
+                        */
+                        MethodInfo info = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
+                        info.Invoke(newObj, null);
+                        
+                    }
+                }
+            }
         }
 
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
@@ -75,6 +96,7 @@ namespace Task5
                 comboBox3.Items.Add(parameters[i].ParameterType.Name + " " + parameters[i].Name);
                 currParams.Add(parameters[i].ParameterType.Name + " " + parameters[i].Name, parameters[i]);
             }
+
             comboBox3.Refresh();
         }
     }
