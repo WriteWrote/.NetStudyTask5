@@ -34,8 +34,24 @@ namespace Task5
 
         private void button2_Click(object sender, EventArgs e)
         {
-            // TODO: выполнять методы
-            throw new System.NotImplementedException();
+            if (comboBox1.SelectedItem != null && comboBox2.SelectedItem != null)
+            {
+                if (comboBox3.Items.Count > 0 && comboBox3.SelectedItem != null)
+                {
+                    MethodInfo info = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
+                    info.Invoke(currObj, null);
+                }
+            }
+
+            //SomeType someObject2 = newObj as SomeType;
+            /*
+            currObj = (ITextile) newObj;
+            currObj.Invoke(currMethods[comboBox2.SelectedItem.ToString().Trim()]);
+            
+            MethodInfo m, mb;
+            m = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
+            mb = m.GetBaseDefinition();
+            */
         }
 
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
@@ -62,31 +78,19 @@ namespace Task5
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
-            // TODO: если к-б-ы не пусты, нажат энтер, то заполнить поле класса
             if (comboBox1.SelectedItem != null && comboBox2.SelectedItem != null)
             {
                 if (comboBox3.Items.Count > 0 && comboBox3.SelectedItem != null)
                 {
                     object newObj = Activator.CreateInstance(currType);
+                    currObj = (ITextile) newObj;
                     if (e.KeyCode == Keys.Enter)
                     {
                         String parName = comboBox3.SelectedItem.ToString().Trim();
                         String par = textBox2.Text.Trim();
                         MethodInfo setMethod = currType.GetMethod("set" + parName);
-                        setMethod.Invoke(newObj, new[] {par});
+                        setMethod.Invoke(currObj, new[] {par});
                     }
-
-                    //SomeType someObject2 = newObj as SomeType;
-                    /*
-                    currObj = (ITextile) newObj;
-                    currObj.Invoke(currMethods[comboBox2.SelectedItem.ToString().Trim()]);
-                    
-                    MethodInfo m, mb;
-                    m = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
-                    mb = m.GetBaseDefinition();
-                    */
-                    MethodInfo info = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
-                    info.Invoke(newObj, null);
                 }
             }
         }
