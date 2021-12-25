@@ -57,15 +57,17 @@ namespace Task5
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            //
-            if (comboBox1.SelectedItem != null && comboBox2.SelectedItem != null)
+            if (textBox1.Text != "" && comboBox1.SelectedItem != null && comboBox2.SelectedItem != null &&
+                comboBox3.Items.Count == 0)
             {
-                if (comboBox3.Items.Count > 0 && comboBox3.SelectedItem != null)
-                {
-                    // TODO: глянуть на это
-                    MethodInfo info = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
-                    info.Invoke(currObj, null);
-                }
+                // TODO: глянуть на это
+                String s = comboBox2.SelectedItem.ToString().Trim();
+                String[] ass = s.Split(' ');
+                String ss = ass[ass.Length - 1];
+                MethodInfo meth = currType.GetMethod(ss);
+
+                listBox1.Items.Add(currObj.ToString());
+                meth.Invoke(currObj, null);
             }
             //SomeType someObject2 = newObj as SomeType;
             /*
@@ -85,10 +87,15 @@ namespace Task5
         /// <param name="e"></param>
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            String s = currAsm.FullName.Split(',')[0].Trim() + comboBox1.SelectedItem.ToString().Trim();
+            String s = currAsm.FullName.Split(',')[0].Trim() + "." + comboBox1.SelectedItem.ToString().Trim();
             currType = Type.GetType(s);
+            
+            object newObj = Activator.CreateInstance(currType);
+            currObj = (ITextile) newObj;
 
             List<String> methods = new List<string>();
+
+            currMethods.Clear();
 
             foreach (MethodInfo method in currType.GetMethods())
             {
@@ -142,6 +149,7 @@ namespace Task5
             MethodInfo method = currMethods[comboBox2.SelectedItem.ToString().Trim()];
             ParameterInfo[] parameters = method.GetParameters();
             comboBox3.Items.Clear();
+            currParams.Clear();
             for (int i = 0; i < parameters.Length; i++)
             {
                 comboBox3.Items.Add(parameters[i].ParameterType.Name + " " + parameters[i].Name);

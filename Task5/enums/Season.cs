@@ -2,8 +2,8 @@
 {
     public enum Season
     {
-        WINTER,
         DEMISEASON,
+        WINTER,
         SUMMER
     }
 }

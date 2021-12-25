@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Task5
 {
@@ -9,13 +10,15 @@ namespace Task5
 
         public void MovetoDustyBox()
         {
-            String message = "You moved to dusty box til next year this element of clothing: " + this.ToString();
+            String message = "You moved to dusty box til next year this element of clothing:\n" + this.ToString();
+            MessageBox.Show(message);
         }
 
         public void ScarePeople()
         {
-            String message = "You successfully scared the hell out of neighbours in this element of clothing: " +
+            String message = "You successfully scared the hell out of neighbours in this element of clothing:\n" +
                              this.ToString();
+            MessageBox.Show(message);
         }
 
         public override string ToString()

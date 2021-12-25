@@ -2,9 +2,9 @@
 {
     public enum Style
     {
+        VINTAGE,
         FORMAL,
         CASUAL,
         MILITARY,
-        VINTAGE
     }
 }

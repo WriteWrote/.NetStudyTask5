@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Task5
 {
@@ -9,12 +10,14 @@ namespace Task5
 
          public void IronIt()
          {
-             String message = "You successfully ironed this element of clothing: " + this.ToString();
+             String message = "You successfully ironed this element of clothing:\n" + this.ToString();
+             MessageBox.Show(message);
          }
 
          public void CrumpleIt()
          {
-             String message = "You successfully crumpled this element of clothing: " + this.ToString();
+             String message = "You successfully crumpled this element of clothing:\n" + this.ToString();
+             MessageBox.Show(message);
          }
 
          public override string ToString()

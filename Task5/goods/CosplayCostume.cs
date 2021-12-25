@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace Task5
 {
@@ -9,12 +10,14 @@ namespace Task5
 
         public void MakePhotosInIt()
         {
-            String message = "You posed for some nice photos in this element of clothing: " + this.ToString();
+            String message = "You posed for some nice photos in this element of clothing:\n" + this.ToString();
+            MessageBox.Show(message);
         }
 
         public void PlayCosplayInIt()
         {
-            String message = "You played " + Hero + " from " + Fandom + " on ComicCon in this element of clothing: " + this.ToString();
+            String message = "You played " + Hero + " from " + Fandom + " on ComicCon in this element of clothing:\n" + this.ToString();
+            MessageBox.Show(message);
         }
 
         public override string ToString()
