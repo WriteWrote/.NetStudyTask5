@@ -2,7 +2,7 @@
 
 Study project for VSU. Exploring reflection in C#.
 
-After loading project the form pops up, where you can insert the namespace (w/ path to it) of project, then hit button "find classes" and in the following combobox will be loaded classes of this namespace (** Note: you will need to remove hardcode sorting if you want to load your own classes, not this Task5 classes**).
+After loading project the form pops up, where you can insert the namespace (w/ path to it) of project, then hit button "find classes" and in the following combobox will be loaded classes of this namespace (*Note: you will need to remove hardcode sorting if you want to load your own classes, not this Task5 classes*).
 
 Then will be created an object of chosen class, and all it's methods will be loaded into second combobox. If you choose some method, you can pick it's parameters and fill them by entering value in textbox and then hitting button **Enter**.
 
