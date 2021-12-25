@@ -22,7 +22,7 @@ namespace Task5
 
         public override string ToString()
         {
-            return "cosplay costume of " + Hero + " from, " + Fandom + ", " + base.ToString();
+            return "cosplay costume of " + Hero + " from " + Fandom + ", " + base.ToString();
         }
     }
 }

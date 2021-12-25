@@ -18,7 +18,8 @@ namespace Task5
         {
             String message = "You successfully scared the hell out of neighbours in this element of clothing:\n" +
                              this.ToString();
-            MessageBox.Show(message);
+            String message2 = "Вы напугали деда в \n" + this.ToString();
+            MessageBox.Show(message2);
         }
 
         public override string ToString()

@@ -126,9 +126,14 @@ namespace Task5
                 {
                     if (e.KeyCode == Keys.Enter)
                     {
+                        int i = listBox1.Items.IndexOf(currObj.ToString());
+                        
                         String parValue = textBox2.Text.Trim();
                         MethodInfo setMethod = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim().Split(' ')[1]);
                         setMethod.Invoke(currObj, new[] {parValue});
+                        
+                        listBox1.Items[i] = currObj.ToString();
+                        listBox1.Refresh();
                     }
                 }
             }
