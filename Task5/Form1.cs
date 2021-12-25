@@ -15,6 +15,7 @@ namespace Task5
 {
     public partial class Form1 : Form
     {
+        private Assembly currAsm;
         private Type currType;
         private Dictionary<String, MethodInfo> currMethods;
         private Dictionary<String, ParameterInfo> currParams;
@@ -27,22 +28,45 @@ namespace Task5
             this.currParams = new Dictionary<String, ParameterInfo>();
         }
 
+        /// <summary>
+        /// искать классы по названию проекта
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            // TODO: искать классы и загружать их в к-б бокс
+            currAsm = Assembly.Load(textBox1.Text.Trim());
+
+            //listBox1.Items.Add(asm.FullName);
+
+            Type[] types = currAsm.GetTypes();
+            comboBox1.Items.Clear();
+            foreach (Type t in types)
+            {
+                if (t.IsClass && t.Name.Contains("Costume"))
+                    comboBox1.Items.Add(t.Name);
+            }
+
+            comboBox1.Refresh();
         }
 
+        /// <summary>
+        /// Выполнить метод
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
+            //
             if (comboBox1.SelectedItem != null && comboBox2.SelectedItem != null)
             {
                 if (comboBox3.Items.Count > 0 && comboBox3.SelectedItem != null)
                 {
+                    // TODO: глянуть на это
                     MethodInfo info = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim());
                     info.Invoke(currObj, null);
                 }
             }
-
             //SomeType someObject2 = newObj as SomeType;
             /*
             currObj = (ITextile) newObj;
@@ -54,13 +78,19 @@ namespace Task5
             */
         }
 
+        /// <summary>
+        /// выбрать класс
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            Type myType = Type.GetType(comboBox1.SelectedItem.ToString().Trim(), false, true);
-            currType = myType;
+            String s = currAsm.FullName.Split(',')[0].Trim() + comboBox1.SelectedItem.ToString().Trim();
+            currType = Type.GetType(s);
+
             List<String> methods = new List<string>();
 
-            foreach (MethodInfo method in myType.GetMethods())
+            foreach (MethodInfo method in currType.GetMethods())
             {
                 string modificator = "";
                 if (method.IsStatic)
@@ -76,6 +106,11 @@ namespace Task5
             comboBox2.Refresh();
         }
 
+        /// <summary>
+        /// заполнить поле
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
             if (comboBox1.SelectedItem != null && comboBox2.SelectedItem != null)
@@ -83,18 +118,25 @@ namespace Task5
                 if (comboBox3.Items.Count > 0 && comboBox3.SelectedItem != null)
                 {
                     object newObj = Activator.CreateInstance(currType);
-                    currObj = (ITextile) newObj;
+                    //currObj = (ITextile) newObj;
                     if (e.KeyCode == Keys.Enter)
                     {
                         String parName = comboBox3.SelectedItem.ToString().Trim();
                         String par = textBox2.Text.Trim();
                         MethodInfo setMethod = currType.GetMethod("set" + parName);
+                        // вот здесь 
+                        // мб set_ + parName? и еще без типа метода
                         setMethod.Invoke(currObj, new[] {par});
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Выбрать метод
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboBox2_SelectionChangeCommitted(object sender, EventArgs e)
         {
             MethodInfo method = currMethods[comboBox2.SelectedItem.ToString().Trim()];
