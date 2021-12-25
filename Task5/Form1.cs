@@ -60,13 +60,12 @@ namespace Task5
             if (textBox1.Text != "" && comboBox1.SelectedItem != null && comboBox2.SelectedItem != null &&
                 comboBox3.Items.Count == 0)
             {
-                // TODO: глянуть на это
                 String s = comboBox2.SelectedItem.ToString().Trim();
                 String[] ass = s.Split(' ');
                 String ss = ass[ass.Length - 1];
                 MethodInfo meth = currType.GetMethod(ss);
 
-                listBox1.Items.Add(currObj.ToString());
+                //listBox1.Items.Add(currObj.ToString());
                 meth.Invoke(currObj, null);
             }
             //SomeType someObject2 = newObj as SomeType;
@@ -92,6 +91,7 @@ namespace Task5
             
             object newObj = Activator.CreateInstance(currType);
             currObj = (ITextile) newObj;
+            listBox1.Items.Add(currObj.ToString());
 
             List<String> methods = new List<string>();
 
@@ -124,16 +124,11 @@ namespace Task5
             {
                 if (comboBox3.Items.Count > 0 && comboBox3.SelectedItem != null)
                 {
-                    object newObj = Activator.CreateInstance(currType);
-                    //currObj = (ITextile) newObj;
                     if (e.KeyCode == Keys.Enter)
                     {
-                        String parName = comboBox3.SelectedItem.ToString().Trim();
-                        String par = textBox2.Text.Trim();
-                        MethodInfo setMethod = currType.GetMethod("set" + parName);
-                        // вот здесь 
-                        // мб set_ + parName? и еще без типа метода
-                        setMethod.Invoke(currObj, new[] {par});
+                        String parValue = textBox2.Text.Trim();
+                        MethodInfo setMethod = currType.GetMethod(comboBox2.SelectedItem.ToString().Trim().Split(' ')[1]);
+                        setMethod.Invoke(currObj, new[] {parValue});
                     }
                 }
             }
